@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
       create: (context) => NoteCubit(),
       child: MaterialApp(
         theme: ThemeData(
-          appBarTheme: AppBarTheme(backgroundColor: Color(0xffF7FCFC)),
-          scaffoldBackgroundColor: Color(0xffF7FCFC),
+          appBarTheme: const AppBarTheme(backgroundColor: Color(0xffF7FCFC)),
+          scaffoldBackgroundColor: const Color(0xffF7FCFC),
         ),
         home: const HomeView(),
       ),
