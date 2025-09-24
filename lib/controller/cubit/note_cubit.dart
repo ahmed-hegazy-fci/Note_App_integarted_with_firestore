@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'note_state.dart';
+import 'package:note_app/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/models/note_model.dart';
@@ -10,17 +11,9 @@ class NoteCubit extends Cubit<NoteState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController title = TextEditingController();
   TextEditingController desc = TextEditingController();
-  CollectionReference users = FirebaseFirestore.instance.collection('notes');
-
-  List<NoteModel> notes = [];
-
-  void addNoteToList(NoteModel note) {
-    notes.add(note);
-  }
-
-  void deleteNote(NoteModel note) {
-    notes.removeWhere((e) => e.description == note.description);
-  }
+  CollectionReference users = FirebaseFirestore.instance.collection(
+    FireBaseKeys.notes,
+  );
 
   Future<void> addNoteToData(NoteModel note) {
     return users
@@ -29,7 +22,7 @@ class NoteCubit extends Cubit<NoteState> {
         .catchError((error) => log("Failed to add Note: $error"));
   }
 
-  Stream<List<NoteModel>> watchNotes() {
+  Stream<List<NoteModel>> getNotes() {
     return users
         .orderBy('date', descending: true)
         .snapshots()
@@ -40,5 +33,14 @@ class NoteCubit extends Cubit<NoteState> {
               )
               .toList(),
         );
+  }
+
+  Future<void> deleteNote(String noteDate) async {
+    try {
+      await users.doc(noteDate).delete();
+      log("Note Deleted");
+    } catch (error) {
+      log("Failed to delete Note: $error");
+    }
   }
 }

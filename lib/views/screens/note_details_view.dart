@@ -10,8 +10,8 @@ class NoteDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Note Details'),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.edit))],
+        title: const Text('Note Details'),
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.edit))],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),

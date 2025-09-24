@@ -8,11 +8,12 @@ class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
   @override
   Widget build(BuildContext context) {
+    var cubit = BlocProvider.of<NoteCubit>(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Form(
-          key: BlocProvider.of<NoteCubit>(context).formKey,
+          key: cubit.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -31,13 +32,13 @@ class HomeViewBody extends StatelessWidget {
                   return null;
                 },
 
-                controller: BlocProvider.of<NoteCubit>(context).title,
+                controller: cubit.title,
                 decoration: InputDecoration(
                   hintText: 'Enter  note title',
-                  hintStyle: TextStyle(color: Color(0xFF0AD9D9)),
+                  hintStyle: const TextStyle(color: Color(0xFF0AD9D9)),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: Color(0xFF0AD9D9)),
+                    borderSide: const BorderSide(color: Color(0xFF0AD9D9)),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 14,
@@ -55,7 +56,7 @@ class HomeViewBody extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               TextFormField(
-                controller: BlocProvider.of<NoteCubit>(context).desc,
+                controller: cubit.desc,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Content cannot be empty';
@@ -65,10 +66,10 @@ class HomeViewBody extends StatelessWidget {
                 maxLines: 8,
                 decoration: InputDecoration(
                   hintText: 'Enter  note content',
-                  hintStyle: TextStyle(color: Color(0xFF0AD9D9)),
+                  hintStyle: const TextStyle(color: Color(0xFF0AD9D9)),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: Color(0xFF0AD9D9)),
+                    borderSide: const BorderSide(color: Color(0xFF0AD9D9)),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 14,
@@ -91,31 +92,16 @@ class HomeViewBody extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: () {
-                    if (BlocProvider.of<NoteCubit>(
-                      context,
-                    ).formKey.currentState!.validate()) {
-                      BlocProvider.of<NoteCubit>(context).addNoteToList(
+                  onPressed: () async{
+                    if (cubit.formKey.currentState!.validate()) {
+                     await cubit.addNoteToData(
                         NoteModel(
                           date: DateTime.now(),
-                          title: BlocProvider.of<NoteCubit>(context).title.text,
-                          description: BlocProvider.of<NoteCubit>(
-                            context,
-                          ).desc.text,
+                          title: cubit.title.text,
+                          description: cubit.desc.text,
                         ),
                       );
-                      BlocProvider.of<NoteCubit>(context).addNoteToData(
-                        NoteModel(
-                          date: DateTime.now(),
-                          title: BlocProvider.of<NoteCubit>(context).title.text,
-                          description: BlocProvider.of<NoteCubit>(
-                            context,
-                          ).desc.text,
-                        ),
-                      );
-                      BlocProvider.of<NoteCubit>(
-                        context,
-                      ).formKey.currentState!.reset();
+                      cubit.formKey.currentState!.reset();
                     }
                   },
                   child: const Text(
@@ -128,9 +114,9 @@ class HomeViewBody extends StatelessWidget {
               Center(
                 child: TextButton(
                   onPressed: () {
-                    Navigator.of(
-                      context,
-                    ).push(MaterialPageRoute(builder: (_) => NotesListView()));
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const NotesListView()),
+                    );
                   },
                   child: const Text(
                     'View Notes',
