@@ -12,19 +12,19 @@ class NoteDetailsBody extends StatelessWidget {
       children: [
         Text(
           note.title,
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           note.description,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
           textAlign: TextAlign.start,
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           'Created At: '
           '${note.date.year.toString().padLeft(4, '0')}-${note.date.month.toString().padLeft(2, '0')}-${note.date.day.toString().padLeft(2, '0')} (${note.date.hour.toString().padLeft(2, '0')}:${note.date.minute.toString().padLeft(2, '0')})',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w400,
             color: Color(0xFF0AD9D9),
