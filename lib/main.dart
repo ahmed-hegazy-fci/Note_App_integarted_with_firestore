@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:note_app/views/screens/home_view.dart';
+import 'package:note_app/views/screens/auth_view.dart';
 import 'package:note_app/controller/cubit/note_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  checkUserAuthentication();
   runApp(const MyApp());
 }
 
@@ -23,8 +25,18 @@ class MyApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xffF7FCFC)),
           scaffoldBackgroundColor: const Color(0xffF7FCFC),
         ),
-        home: const HomeView(),
+        home: const AuthView(),
       ),
     );
   }
+}
+
+void checkUserAuthentication() {
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User is signed in!');
+    }
+  });
 }
