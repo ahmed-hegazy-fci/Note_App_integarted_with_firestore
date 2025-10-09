@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:note_app/views/screens/auth_view.dart';
 import 'package:note_app/views/widgets/home_body.dart';
 

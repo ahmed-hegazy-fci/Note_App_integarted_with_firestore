@@ -21,7 +21,10 @@ class HomeViewBody extends StatelessWidget {
 
               const Text(
                 'Note Title',
-                style: TextStyle(fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF0AD9D9),
+                ),
               ),
               const SizedBox(height: 8),
               TextFormField(
@@ -52,7 +55,10 @@ class HomeViewBody extends StatelessWidget {
               const SizedBox(height: 16),
               const Text(
                 'Content',
-                style: TextStyle(fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF0AD9D9),
+                ),
               ),
               const SizedBox(height: 8),
               TextFormField(
@@ -92,9 +98,9 @@ class HomeViewBody extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: () async{
+                  onPressed: () async {
                     if (cubit.formKey.currentState!.validate()) {
-                     await cubit.addNoteToData(
+                      await cubit.addNoteToData(
                         NoteModel(
                           date: DateTime.now(),
                           title: cubit.title.text,
