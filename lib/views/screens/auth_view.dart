@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:note_app/views/screens/home_view.dart';
 import 'package:note_app/controller/cubit/note_cubit.dart';
 import 'package:note_app/controller/cubit/note_state.dart';
