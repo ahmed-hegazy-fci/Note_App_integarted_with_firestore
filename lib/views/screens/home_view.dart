@@ -10,6 +10,11 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Note'),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () => throw Exception(),
+          icon: const Icon(Icons.error_outline),
+        ),
         actions: [
           IconButton(
             onPressed: () {

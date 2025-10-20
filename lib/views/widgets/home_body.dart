@@ -100,12 +100,13 @@ class HomeViewBody extends StatelessWidget {
                   ),
                   onPressed: () async {
                     if (cubit.formKey.currentState!.validate()) {
-                      await cubit.addNoteToData(
+                      await cubit.addNote(
                         NoteModel(
                           date: DateTime.now(),
                           title: cubit.title.text,
                           description: cubit.desc.text,
                         ),
+                        context,
                       );
                       cubit.formKey.currentState!.reset();
                     }

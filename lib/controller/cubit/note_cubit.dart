@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'note_state.dart';
 import 'package:note_app/keys.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +18,17 @@ class NoteCubit extends Cubit<NoteState> {
     FireBaseKeys.notes,
   );
 
-  Future<void> addNoteToData(NoteModel note) {
+  Future<void> addNote(NoteModel note, context) {
     return users
         .add(note.toMap())
         .then((value) => log("Note Added"))
+        //TODO
+        // .then(
+        //   (value) => context.read<AppProvider>().addTaskEvent(
+        //     title.text,
+        //     DateTime.now().toUtc(),
+        //   ),
+        // )
         .catchError((error) => log("Failed to add Note: $error"));
   }
 
